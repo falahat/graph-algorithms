@@ -4,6 +4,7 @@ import model.Edge;
 import model.Graph;
 import model.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DepthFirstSearch<N extends Node, E extends Edge<N>>  extends GraphTraversal<N, E> {
@@ -18,11 +19,11 @@ public class DepthFirstSearch<N extends Node, E extends Edge<N>>  extends GraphT
 
     @Override
     List<N> selectFirstNodes() {
-        return graph.nodes();
+        return new ArrayList<>(graph.nodes());
     }
 
     @Override
     void visit(N node, Edge<N> edgeToNode) {
-
+        // No-Op
     }
 }
