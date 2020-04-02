@@ -1,0 +1,28 @@
+package algorithms;
+
+import model.Edge;
+import model.Graph;
+import model.Node;
+
+import java.util.List;
+
+public class DepthFirstSearch<N extends Node, E extends Edge<N>>  extends GraphTraversal<N, E> {
+    public DepthFirstSearch(Graph<N, E> graph) {
+        super(graph);
+    }
+
+    @Override
+    int selectIndexOfNextNode(List<N> nextNodes) {
+        return nextNodes.size() - 1;
+    }
+
+    @Override
+    List<N> selectFirstNodes() {
+        return graph.nodes();
+    }
+
+    @Override
+    void visit(N node, Edge<N> edgeToNode) {
+
+    }
+}
