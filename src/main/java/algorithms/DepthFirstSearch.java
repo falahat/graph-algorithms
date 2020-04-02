@@ -26,4 +26,14 @@ public class DepthFirstSearch<N extends Node, E extends Edge<N>>  extends GraphT
     void visit(N node, Edge<N> edgeToNode) {
         // No-Op
     }
+
+    @Override
+    boolean canVisitNode(N node) {
+        return true;
+    }
+
+    @Override
+    boolean canVisitEdge(E edge) {
+        return true;
+    }
 }
