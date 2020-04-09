@@ -1,5 +1,9 @@
 package model;
 
+import model.edge.Edge;
+import model.graph.Graph;
+import model.node.Node;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
