@@ -7,7 +7,7 @@ import model.node.Node;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AdjacencyListGraph<N, E> implements Graph<N, E> {
+public class AdjacencyListGraph<N> implements Graph<N> {
     private Map<Node, List<Edge>> nodesToEdges;
     private Map<N, Node> nodeKeyToNode;
 
@@ -87,11 +87,6 @@ public class AdjacencyListGraph<N, E> implements Graph<N, E> {
                 .stream()
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Edge> edges(E targetValue) {
-        return null;
     }
 
     @Override
