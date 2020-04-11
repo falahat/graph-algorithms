@@ -7,9 +7,9 @@ import model.node.Node;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AdjacencyListGraph<N, E> implements Graph {
+public class AdjacencyListGraph<N, E> implements Graph<N, E> {
     private Map<Node, List<Edge>> nodesToEdges;
-    private Map<String, Node> nodeKeyToNode;
+    private Map<N, Node> nodeKeyToNode;
 
     public AdjacencyListGraph() {
         nodesToEdges = new HashMap<>(); // Contains both incoming + outgoing connections
@@ -22,7 +22,7 @@ public class AdjacencyListGraph<N, E> implements Graph {
     }
 
     @Override
-    public Node add(String nodeKey) {
+    public Node add(N nodeKey) {
         if (nodeKeyToNode.containsKey(nodeKey)) {
             throw new IllegalStateException("Node already exists");
         }
@@ -68,7 +68,7 @@ public class AdjacencyListGraph<N, E> implements Graph {
     }
 
     @Override
-    public List<Node> nodes(String targetValue) {
+    public List<Node> nodes(N targetValue) {
         return new ArrayList<>(nodesToEdges.keySet());
     }
 
@@ -87,6 +87,11 @@ public class AdjacencyListGraph<N, E> implements Graph {
                 .stream()
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Edge> edges(E targetValue) {
+        return null;
     }
 
     @Override
