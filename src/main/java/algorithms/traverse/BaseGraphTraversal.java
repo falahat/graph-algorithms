@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class BaseGraphTraversal<N> implements GraphTraversal {
+public abstract class BaseGraphTraversal<N extends Cloneable> implements GraphTraversal {
     private Graph<N> graph;
     private Set<Node> visitedNodes;
     private boolean isInitialized;

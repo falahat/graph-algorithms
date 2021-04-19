@@ -4,7 +4,7 @@ import model.graph.Graph;
 
 import java.util.*;
 
-public abstract class ListBackedGraphTraversal<N> extends BaseGraphTraversal<N> {
+public abstract class ListBackedGraphTraversal<N extends Cloneable> extends BaseGraphTraversal<N> {
     private List<TraversalStep> possibleSteps;
 
     public ListBackedGraphTraversal(Graph<N> graph) {

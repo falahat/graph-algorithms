@@ -7,13 +7,18 @@ import model.node.Node;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AdjacencyListGraph<N> implements Graph<N> {
+public class AdjacencyListGraph<N extends Cloneable> implements Graph<N> {
     private Map<Node, List<Edge>> nodesToEdges;
     private Map<N, Node> nodeKeyToNode;
 
     public AdjacencyListGraph() {
         nodesToEdges = new HashMap<>(); // Contains both incoming + outgoing connections
         nodeKeyToNode = new HashMap<>();
+    }
+
+    public AdjacencyListGraph(AdjacencyListGraph<N> toCopy) {
+        this();
+        // TODO: copy
     }
 
     @Override
@@ -70,6 +75,11 @@ public class AdjacencyListGraph<N> implements Graph<N> {
     @Override
     public List<Node> nodes(N targetValue) {
         return new ArrayList<>(nodesToEdges.keySet());
+    }
+
+    @Override
+    public N value(Node node) {
+        return null;
     }
 
     @Override
