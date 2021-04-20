@@ -1,7 +1,5 @@
 package model;
 
-import model.node.Node;
-
 import java.util.Collection;
 
 public class UndirectedAdjacencyListGraph<K> extends AdjacencyListGraph<K> {

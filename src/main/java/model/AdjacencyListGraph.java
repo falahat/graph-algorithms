@@ -5,7 +5,7 @@ import model.graph.Graph;
 import java.util.*;
 
 public abstract class AdjacencyListGraph<K> implements Graph<K> {
-    Map<K, Set<K>> outgoingConnections;
+    final Map<K, Set<K>> outgoingConnections;
 
     public AdjacencyListGraph() {
         this.outgoingConnections = new HashMap<>();

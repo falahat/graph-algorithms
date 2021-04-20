@@ -6,7 +6,7 @@ import model.node.Node;
 import java.util.*;
 
 public abstract class ListBackedGraphTraversal extends BaseGraphTraversal {
-    private List<Node> possibleSteps;
+    private final List<Node> possibleSteps;
 
     public ListBackedGraphTraversal(Graph graph) {
         super(graph);

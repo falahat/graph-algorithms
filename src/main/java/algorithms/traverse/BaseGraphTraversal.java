@@ -5,13 +5,12 @@ import model.node.Node;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public abstract class BaseGraphTraversal implements GraphTraversal {
-    private Graph graph;
-    private Set<Node> visitedNodes;
-    private boolean isInitialized;
-    private List<Node> initialNodes;
+    private final Graph graph;
+    private final Set<Node> visitedNodes;
+    private final boolean isInitialized;
+    private final List<Node> initialNodes;
 
     private Node currentNode;
 
