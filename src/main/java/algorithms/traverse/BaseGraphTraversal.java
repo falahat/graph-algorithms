@@ -1,7 +1,6 @@
 package algorithms.traverse;
 
 import model.graph.Graph;
-import model.node.Node;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -27,7 +26,7 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
     }
 
     public void initialize() {
-        addPossibleTraversals(initialNodes);
+        pushCandidates(initialNodes);
     }
 
     @Override
@@ -40,7 +39,7 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
         }
 
         while (this.currentNode == null) {
-            Optional<K> nextPossibleStepOpt = selectAndRemoveNextCandidate();
+            Optional<K> nextPossibleStepOpt = popNextCandidate();
             if (nextPossibleStepOpt.isEmpty()) {
                 break;
             }
@@ -60,12 +59,12 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
         if (hasNext()) {
             K toReturn = this.currentNode;
 
-            // Mark this node as visted and call hooks
-            markAsVisited(this.currentNode);
+            // Mark this node as visited and call hooks
+            markVisited(this.currentNode);
             onVisit(this.currentNode);
 
             // Calculate + insert next possible steps to traverse
-            addPossibleTraversals(graph.edges(currentNode));
+            pushCandidates(graph.edges(currentNode));
 
             return toReturn;
         }
@@ -74,7 +73,7 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
     }
 
     @Override
-    public void markAsVisited(K visited) {
+    public void markVisited(K visited) {
         this.visitedNodes.add(visited);
     }
 
@@ -83,9 +82,9 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
         return !visitedNodes.contains(node);
     }
 
-    public abstract void addPossibleTraversals(Collection<K> nextPossible);
+    public abstract void pushCandidates(Collection<K> nextPossible);
 
-    public abstract Optional<K> selectAndRemoveNextCandidate(); // TODO: rename to popNextCandidate?
+    public abstract Optional<K> popNextCandidate(); // TODO: rename to popNextCandidate?
 
     private List<K> getTraversalsFromInitialNodes() {
         return new ArrayList<>(initialNodes);

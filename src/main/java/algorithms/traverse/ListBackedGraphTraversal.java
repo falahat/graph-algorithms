@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class ListBackedGraphTraversal<K> extends BaseGraphTraversal<K> {
-    private final List<K> possibleSteps;
+    private final List<K> possibleSteps; // TODO: efficiency of using a list?
 
     public ListBackedGraphTraversal(Graph<K> graph) {
         super(graph);
@@ -16,12 +16,12 @@ public abstract class ListBackedGraphTraversal<K> extends BaseGraphTraversal<K> 
     }
 
     @Override
-    public void addPossibleTraversals(Collection<K> nextPossible) {
+    public void pushCandidates(Collection<K> nextPossible) {
         possibleSteps.addAll(nextPossible); // Goes to end of list
     }
 
     @Override
-    public Optional<K> selectAndRemoveNextCandidate() {
+    public Optional<K> popNextCandidate() {
         if (possibleSteps.isEmpty()) {
             return Optional.empty();
         }
