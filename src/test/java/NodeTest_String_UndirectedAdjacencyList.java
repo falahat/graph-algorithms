@@ -1,11 +1,11 @@
-import model.TestItemGenerator;
+import model.GraphTestUtil;
 import model.UndirectedAdjacencyListGraph;
 import model.graph.NodeTest;
 
-public class NodeTest_String_UndirectedAdjacencyList extends NodeTest<String, UndirectedAdjacencyListGraph<String>> {
+public class NodeTest_String_UndirectedAdjacencyList extends NodeTest {
 
     @Override
-    public TestItemGenerator<String, UndirectedAdjacencyListGraph<String>> itemGenerator() {
+    public GraphTestUtil<String, UndirectedAdjacencyListGraph<String>> testUtil() {
         return new StringUALGenerator();
     }
 

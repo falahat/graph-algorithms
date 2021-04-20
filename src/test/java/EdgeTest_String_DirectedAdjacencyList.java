@@ -1,10 +1,10 @@
 import model.DirectedAdjacencyListGraph;
-import model.TestItemGenerator;
+import model.GraphTestUtil;
 import model.graph.EdgeTest;
 
-public class EdgeTest_String_DirectedAdjacencyList extends EdgeTest<String, DirectedAdjacencyListGraph<String>> {
+public class EdgeTest_String_DirectedAdjacencyList extends EdgeTest {
     @Override
-    public TestItemGenerator<String, DirectedAdjacencyListGraph<String>> itemGenerator() {
+    public GraphTestUtil<String, DirectedAdjacencyListGraph<String>> testUtil() {
         return new StringDALGenerator();
     }
 }

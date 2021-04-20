@@ -1,7 +1,7 @@
 import model.DirectedAdjacencyListGraph;
-import model.TestItemGenerator;
+import model.GraphTestUtil;
 
-public class StringDALGenerator implements TestItemGenerator<String, DirectedAdjacencyListGraph<String>> {
+public class StringDALGenerator extends GraphTestUtil<String, DirectedAdjacencyListGraph<String>> {
     @Override
     public DirectedAdjacencyListGraph<String> generateGraph() {
         return new DirectedAdjacencyListGraph<>();
