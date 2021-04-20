@@ -1,35 +1,34 @@
 package model;
 
 import model.graph.Graph;
-import model.node.Node;
 
 import java.util.*;
 
-public abstract class AdjacencyListGraph implements Graph {
-    Map<Node, Set<Node>> outgoingConnections;
+public abstract class AdjacencyListGraph<K> implements Graph<K> {
+    Map<K, Set<K>> outgoingConnections;
 
     public AdjacencyListGraph() {
         this.outgoingConnections = new HashMap<>();
     }
 
     @Override
-    public void add(Node node) {
+    public void add(K node) {
         assertExists(node, false);
         this.outgoingConnections.put(node, new HashSet<>());
     }
 
     @Override
-    public void remove(Node node) {
+    public void remove(K node) {
         assertExists(node, true);
         this.outgoingConnections.remove(node);
 
-        for (Set<Node> destinations : this.outgoingConnections.values()) {
+        for (Set<K> destinations : this.outgoingConnections.values()) {
             destinations.remove(node); // TODO: be more efficient
         }
     }
 
     @Override
-    public void connect(Node source, Node destination) {
+    public void connect(K source, K destination) {
         assertExists(source, true);
         assertExists(destination, true);
 
@@ -37,7 +36,7 @@ public abstract class AdjacencyListGraph implements Graph {
     }
 
     @Override
-    public void disconnect(Node source, Node destination) {
+    public void disconnect(K source, K destination) {
         assertExists(source, true);
         assertExists(destination, true);
 
@@ -45,21 +44,21 @@ public abstract class AdjacencyListGraph implements Graph {
     }
 
     @Override
-    public Collection<Node> nodes() {
+    public Collection<K> nodes() {
         return this.outgoingConnections.keySet();
     }
 
     @Override
-    public boolean contains(Node node) {
+    public boolean contains(K node) {
         return outgoingConnections.containsKey(node);
     }
 
     @Override
-    public boolean isConnected(Node source, Node destination) {
+    public boolean isConnected(K source, K destination) {
         return outgoingConnections.getOrDefault(source, Collections.emptySet()).contains(destination);
     }
 
-    private void assertExists(Node node, boolean isExpected) {
+    private void assertExists(K node, boolean isExpected) {
         boolean exists = contains(node);
         if (!isExpected && exists) {
             throw new IllegalStateException("Adding node that already exists");

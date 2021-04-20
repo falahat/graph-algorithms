@@ -1,13 +1,11 @@
 package model;
 
-import model.node.Node;
-
 import java.util.Collection;
 
-public class DirectedAdjacencyListGraph extends AdjacencyListGraph {
+public class DirectedAdjacencyListGraph<K> extends AdjacencyListGraph<K> {
 
     @Override
-    public Collection<Node> edges(Node source) {
+    public Collection<K> edges(K source) {
         return this.outgoingConnections.get(source);
     }
 }
