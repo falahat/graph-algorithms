@@ -6,20 +6,20 @@ import model.node.Node;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public abstract class BaseGraphTraversal implements GraphTraversal {
-    private final Graph graph;
-    private final Set<Node> visitedNodes;
+public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
+    private final Graph<K> graph;
+    private final Set<K> visitedNodes;
     private final boolean isInitialized;
-    private final List<Node> initialNodes;
+    private final List<K> initialNodes;
 
-    private Node currentNode;
+    private K currentNode;
 
     // TODO: investigate "Possible heap pollution from parameterized vararg type"
-    public BaseGraphTraversal(Graph graph, Node... initialNodes) {
+    public BaseGraphTraversal(Graph<K> graph, K... initialNodes) {
         this(graph, Arrays.asList(initialNodes));
     }
 
-    public BaseGraphTraversal(Graph graph, List<Node> initialNodes) {
+    public BaseGraphTraversal(Graph<K> graph, List<K> initialNodes) {
         this.graph = graph;
         this.visitedNodes = new HashSet<>();
         this.isInitialized = false;
@@ -40,13 +40,13 @@ public abstract class BaseGraphTraversal implements GraphTraversal {
         }
 
         while (this.currentNode == null) {
-            Optional<Node> nextPossibleStepOpt = selectAndRemoveNextCandidate();
+            Optional<K> nextPossibleStepOpt = selectAndRemoveNextCandidate();
             if (nextPossibleStepOpt.isEmpty()) {
                 break;
             }
 
-            Node nextPossibleStep = nextPossibleStepOpt.get();
-            if (isNotVisited(nextPossibleStep) && canVisit(nextPossibleStep)) {
+            K nextPossibleStep = nextPossibleStepOpt.get();
+            if (!isVisited(nextPossibleStep) && canVisit(nextPossibleStep)) {
                 this.currentNode = nextPossibleStep;
                 // This will be visited when we return the next node in #next()
             }
@@ -56,9 +56,9 @@ public abstract class BaseGraphTraversal implements GraphTraversal {
     }
 
     @Override
-    public final Node next() {
+    public final K next() {
         if (hasNext()) {
-            Node toReturn = this.currentNode;
+            K toReturn = this.currentNode;
 
             // Mark this node as visted and call hooks
             markAsVisited(this.currentNode);
@@ -74,27 +74,27 @@ public abstract class BaseGraphTraversal implements GraphTraversal {
     }
 
     @Override
-    public void markAsVisited(Node visited) {
+    public void markAsVisited(K visited) {
         this.visitedNodes.add(visited);
     }
 
     @Override
-    public boolean isNotVisited(Node node) {
+    public boolean isVisited(K node) {
         return !visitedNodes.contains(node);
     }
 
-    public abstract void addPossibleTraversals(Collection<Node> nextPossible);
+    public abstract void addPossibleTraversals(Collection<K> nextPossible);
 
-    public abstract Optional<Node> selectAndRemoveNextCandidate(); // TODO: rename to popNextCandidate?
+    public abstract Optional<K> selectAndRemoveNextCandidate(); // TODO: rename to popNextCandidate?
 
-    private List<Node> getTraversalsFromInitialNodes() {
+    private List<K> getTraversalsFromInitialNodes() {
         return new ArrayList<>(initialNodes);
     }
 
     @Override
-    public GraphTraversal copy() {
+    public GraphTraversal<K> copy() {
         try {
-            return (GraphTraversal) this.getClass().getConstructors()[0].newInstance(this.graph);
+            return (GraphTraversal<K>) this.getClass().getConstructors()[0].newInstance(this.graph);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
             // TODO: do something
