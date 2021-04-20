@@ -61,9 +61,9 @@ public abstract class AdjacencyListGraph<K> implements Graph<K> {
     private void assertExists(K node, boolean isExpected) {
         boolean exists = contains(node);
         if (!isExpected && exists) {
-            throw new IllegalStateException("Adding node that already exists");
+            throw new IllegalStateException("Node must not exist");
         } else if (isExpected && !exists) {
-            throw new IllegalStateException("Removing node that does not exist");
+            throw new IllegalStateException("Node must exist");
         }
     }
 }
