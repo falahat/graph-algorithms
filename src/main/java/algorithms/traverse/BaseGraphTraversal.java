@@ -89,15 +89,4 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
     private List<K> getTraversalsFromInitialNodes() {
         return new ArrayList<>(initialNodes);
     }
-
-    @Override
-    public GraphTraversal<K> copy() {
-        try {
-            return (GraphTraversal<K>) this.getClass().getConstructors()[0].newInstance(this.graph);
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-            // TODO: do something
-            return null;
-        }
-    }
 }
