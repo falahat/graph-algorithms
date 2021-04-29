@@ -2,7 +2,6 @@ package algorithms.traverse;
 
 import model.graph.Graph;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
@@ -86,7 +85,4 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
 
     public abstract Optional<K> popNextCandidate(); // TODO: rename to popNextCandidate?
 
-    private List<K> getTraversalsFromInitialNodes() {
-        return new ArrayList<>(initialNodes);
-    }
 }
