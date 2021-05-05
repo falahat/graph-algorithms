@@ -5,8 +5,8 @@ import model.graph.Graph;
 import java.util.List;
 
 public class BreadthFirstTraversal<K>  extends ListBackedGraphTraversal<K> {
-    public BreadthFirstTraversal(Graph<K> graph) {
-        super(graph);
+    public BreadthFirstTraversal(Graph<K> graph, K... initialNodes) {
+        super(graph, initialNodes);
     }
 
     @Override

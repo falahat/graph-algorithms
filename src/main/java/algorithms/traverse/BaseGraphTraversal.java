@@ -7,8 +7,9 @@ import java.util.*;
 public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
     private final Graph<K> graph;
     private final Set<K> visitedNodes;
-    private final boolean isInitialized;
     private final List<K> initialNodes;
+
+    private boolean isInitialized;
 
     private K currentNode;
 
@@ -26,6 +27,7 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
 
     public void initialize() {
         pushCandidates(initialNodes);
+        isInitialized = true;
     }
 
     @Override
@@ -65,6 +67,7 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
             // Calculate + insert next possible steps to traverse
             pushCandidates(graph.edges(currentNode));
 
+            this.currentNode = null; // to avoid returning the same
             return toReturn;
         }
 
@@ -78,7 +81,7 @@ public abstract class BaseGraphTraversal<K> implements GraphTraversal<K> {
 
     @Override
     public boolean isVisited(K node) {
-        return !visitedNodes.contains(node);
+        return visitedNodes.contains(node);
     }
 
     public abstract void pushCandidates(Collection<K> nextPossible);

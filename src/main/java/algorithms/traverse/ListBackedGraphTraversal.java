@@ -10,8 +10,8 @@ import java.util.Optional;
 public abstract class ListBackedGraphTraversal<K> extends BaseGraphTraversal<K> {
     private final List<K> possibleSteps; // TODO: efficiency of using a list?
 
-    public ListBackedGraphTraversal(Graph<K> graph) {
-        super(graph);
+    public ListBackedGraphTraversal(Graph<K> graph, K... initialNodes) {
+        super(graph, initialNodes);
         this.possibleSteps = new ArrayList<>();
     }
 
